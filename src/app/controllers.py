@@ -4,6 +4,7 @@ from flask_restful import Resource
 from validator import validate
 from functionality.inbound import InboundProcessor
 from functionality.outbound import OutboundProcessor
+from utils.log import logger
 
 class InboundSMSHandler(Resource):
     def post(self):
@@ -11,7 +12,7 @@ class InboundSMSHandler(Resource):
         error = ''
 
         data = request.get_json() or {}
-        print 'Input for inbound sms: %s' %data
+        logger.info('Input for inbound sms: %s' %data)
 
         try:
             validate(data)
@@ -29,8 +30,7 @@ class OutboundSMSHandler(Resource):
         error = ''
 
         data = request.get_json() or {}
-        print 'Input for outbound sms: %s' %data
-
+        logger.info('Input for outbound sms: %s' %data)
 
         try:
             validate(data)
@@ -38,5 +38,6 @@ class OutboundSMSHandler(Resource):
             message = 'outbound sms is ok'
         except Exception as e:
             error = str(e) or 'unknown failure'
+            logger.error(error)
 
         return dict(message=message, error=error)

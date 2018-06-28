@@ -1,4 +1,5 @@
 from models.cache import cache
+from utils.log import logger
 
 class OutboundProcessor(object):
     def __init__(self, data):
@@ -14,8 +15,8 @@ class OutboundProcessor(object):
 
     def _is_opted_out(self):
         if self._check_cache():
-            print 'From %s and To %s pair is opted out' \
-                  %(self.from_num, self.to_num)
+            logger.warning('From %s and To %s pair is opted out' \
+                  %(self.from_num, self.to_num))
             return True
 
     def _check_cache(self):

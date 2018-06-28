@@ -1,5 +1,6 @@
 from marshmallow import Schema, fields, ValidationError, post_load
 from marshmallow.validate import Length
+from utils.log import logger
 
 __all__ = ['validate']
 
@@ -53,10 +54,11 @@ def validate(data):
     try:
         validation_schema.load(data)
     except ValidationError as e:
-        print 'Error messages are: %s' %str(e)
+        logger.debug('Error messages are: %s' %str(e))
         try:
             error_message = e.messages.values()[0][0]
-        except:
+        except Exception as e:
+            logger.error(str(e))
             error_message = 'unknown failure'
         raise ValueError(error_message)
 

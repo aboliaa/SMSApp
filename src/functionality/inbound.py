@@ -1,5 +1,6 @@
 from config import OPT_OUT_STR, CACHE_EXPIRY
 from models.cache import cache
+from utils.log import logger
 
 class InboundProcessor(object):
     def __init__(self, data):
@@ -13,7 +14,7 @@ class InboundProcessor(object):
 
     def _opt_out_if_set(self):
         if self.text == OPT_OUT_STR:
-            print 'As text is STOP, Opt out for configured expiry time'
+            logger.info('As text is STOP, Opt out for configured expiry time')
             self._cache_numbers()
 
     def _cache_numbers(self):

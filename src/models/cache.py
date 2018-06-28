@@ -1,6 +1,7 @@
 import redis
 
 from config import REDIS_HOST, REDIS_PORT, REDIS_DB
+from utils.log import logger
 
 class Cache(object):
     def set(self, key, val='', expiry=None):
@@ -26,7 +27,7 @@ def handle_connection_error(func):
         try:
             return func(*args, **kwargs)
         except redis.exceptions.ConnectionError, e:
-            print 'Error in connecting to Redis server: {}'.format(str(e))
+            logger.error('Error in connecting to Redis server: {}'.format(str(e)))
             raise ValueError()
     return wrapper
 
