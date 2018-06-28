@@ -1,10 +1,9 @@
-from flask import Flask, request
-from flask_restful import Resource, Api
+from flask import request
+from flask_restful import Resource
 
 from validator import validate
-
-app = Flask(__name__)
-api = Api(app)
+from functionality.inbound import InboundProcessor
+from functionality.outbound import OutboundProcessor
 
 class InboundSMSHandler(Resource):
     def post(self):
@@ -16,8 +15,10 @@ class InboundSMSHandler(Resource):
 
         try:
             validate(data)
+            InboundProcessor(data).process()
+            message = 'inbound sms is ok'
         except Exception as e:
-            error = str(e)
+            error = str(e) or 'unknown failure'
 
         return dict(message=message, error=error)
 
@@ -28,18 +29,14 @@ class OutboundSMSHandler(Resource):
         error = ''
 
         data = request.get_json() or {}
-        print 'Input for inbound sms: %s' %data
+        print 'Input for outbound sms: %s' %data
+
 
         try:
             validate(data)
+            OutboundProcessor(data).process()
+            message = 'outbound sms is ok'
         except Exception as e:
-            error = str(e)
+            error = str(e) or 'unknown failure'
 
         return dict(message=message, error=error)
-
-
-api.add_resource(InboundSMSHandler, '/inbound/sms')
-api.add_resource(OutboundSMSHandler, '/outbound/sms')
-
-if __name__ == '__main__':
-    app.run()

@@ -1,0 +1,6 @@
+OPT_OUT_STR = 'STOP'
+CACHE_EXPIRY = 4 * 3600 # 4 hours
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
