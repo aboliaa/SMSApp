@@ -1,0 +1,4 @@
+marshmallow==2.15.3
+Flask_RESTful==0.3.6
+redis==2.10.6
+Flask==1.0.2
