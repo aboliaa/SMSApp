@@ -1,7 +1,7 @@
 from functools import wraps
 from flask import request, abort
 
-from models.auth import check_auth
+from functionality.auth import check_auth
 
 def requires_auth(f):
     @wraps(f)
