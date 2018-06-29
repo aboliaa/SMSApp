@@ -1,12 +1,14 @@
 from flask import request
 from flask_restful import Resource
 
-from validator import validate
+from app.validator import validate
+from app.auth import requires_auth
 from functionality.inbound import InboundProcessor
 from functionality.outbound import OutboundProcessor
 from utils.log import logger
 
 class InboundSMSHandler(Resource):
+    @requires_auth
     def post(self):
         message = ''
         error = ''
@@ -25,6 +27,7 @@ class InboundSMSHandler(Resource):
 
 
 class OutboundSMSHandler(Resource):
+    @requires_auth
     def post(self):
         message = ''
         error = ''
