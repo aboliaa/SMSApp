@@ -1,6 +1,6 @@
- # For performance, one should not use sqlite in production.
-# This is only for demo.
-import sqlite3
+import sqlite3 # For performance, one should not use sqlite in production.
+
+from utils.crypt import encrypt
 
 class SqlDB(object):
     def __init__(self):

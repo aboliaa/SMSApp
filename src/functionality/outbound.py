@@ -1,4 +1,5 @@
-from models.cache import cache
+from functionality.cache import cache
+from functionality.ratelimiter import ratelimit
 from utils.log import logger
 
 class OutboundProcessor(object):
@@ -7,7 +8,9 @@ class OutboundProcessor(object):
         self.from_num = data['from']
         self.to_num = data['to']
 
+    @ratelimit
     def process(self):
+        logger.debug('Process %s' %self.data)
         if self._is_opted_out():
             error = 'sms from %s and to %s blocked by STOP request' \
                     %(self.from_num, self.to_num)

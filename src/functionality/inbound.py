@@ -1,5 +1,5 @@
 from config import OPT_OUT_STR, CACHE_EXPIRY
-from models.cache import cache
+from functionality.cache import cache
 from utils.log import logger
 
 class InboundProcessor(object):

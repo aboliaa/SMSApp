@@ -1,3 +1,7 @@
 import logging
+from config import LOGLEVEL
 
-logger = logging.getLogger(__name__)
+handler = logging.StreamHandler()
+logger = logging.getLogger()
+logger.setLevel(LOGLEVEL)
+logger.addHandler(handler)
