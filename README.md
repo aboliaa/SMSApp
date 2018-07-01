@@ -22,7 +22,8 @@ You can access the server at ```http://127.0.0.1:5000/```
 ## Running the tests
 Run the unit tests using following script
 ```
-python tests/test.py
+python tests/unittests.py
+python tests/integration.py
 ```
 
 ## API specification

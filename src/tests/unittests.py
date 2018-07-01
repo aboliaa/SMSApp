@@ -25,8 +25,18 @@ class Test(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate(data)
 
+    def test_validation_from_missing(self):
+        data = {'to': '9876543', 'text': 'ABC'}
+        with self.assertRaises(ValueError):
+            validate(data)
+
     def test_validation_to_incorrect(self):
         data = {'from': '1234567', 'to': '98765', 'text': 'ABC'}
+        with self.assertRaises(ValueError):
+            validate(data)
+
+    def test_validation_to_missing(self):
+        data = {'from': '1234567', 'text': 'ABC'}
         with self.assertRaises(ValueError):
             validate(data)
 
