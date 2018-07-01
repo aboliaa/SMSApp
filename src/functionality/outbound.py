@@ -17,6 +17,10 @@ class OutboundProcessor(object):
             raise ValueError(error)
 
     def _is_opted_out(self):
+        """
+        This function checks whether 'from' number is in cache,
+        it means that number is opted out.
+        """
         if self._check_cache():
             logger.warning('From %s and To %s pair is opted out' \
                   %(self.from_num, self.to_num))

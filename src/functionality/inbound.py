@@ -13,6 +13,10 @@ class InboundProcessor(object):
         self._opt_out_if_set()
 
     def _opt_out_if_set(self):
+        """
+        This function adds 'from' number in cache, if 'text' is STOP.
+        :return: None
+        """
         if self.text == OPT_OUT_STR:
             logger.info('As text is STOP, Opt out for configured expiry time')
             self._cache_numbers()

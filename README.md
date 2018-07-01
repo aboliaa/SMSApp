@@ -2,6 +2,11 @@
 App to handle inbound and outbound SMS  
 This is a simple SMS app that exposes the following 2 APIs that accepts JSON data as input. 
 
+##Architecture
+- This app is written in Python using Flask web framework.  
+- Caching and Ratelimiting is implemented by maintaining required information in Redis.  
+- User data (credentials) are stored in SQLite.
+
 ## Installation
 
 Install all required Python packages using requirements.txt
@@ -11,13 +16,23 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-## Run the server
+Install and run Redis server by following these steps:
+
+[https://redis.io/topics/quickstart](https://redis.io/topics/quickstart)
+
+OR  
+[https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-redis-on-ubuntu-16-04](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-redis-on-ubuntu-16-04)  
+Note that, default port for Redis is 6379. If your Redis server is running at different port, change it in config.py.
+
+## Running the server
 This is a Python Flask server. Use script run.py to run the server locally.
 
 ```
 python run.py
 ```
 You can access the server at ```http://127.0.0.1:5000/```
+
+Test user is already populated in sqlite database. Credentials user:secret can be used for Basic authentication.
 
 ## Running the tests
 Run the unit tests using following script

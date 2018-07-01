@@ -8,6 +8,9 @@ from functionality.outbound import OutboundProcessor
 from utils.log import logger
 
 class InboundSMSHandler(Resource):
+    """
+    Handler for inbound SMS API
+    """
     @requires_auth
     def post(self):
         message = ''
@@ -22,11 +25,15 @@ class InboundSMSHandler(Resource):
             message = 'inbound sms is ok'
         except Exception as e:
             error = str(e) or 'unknown failure'
+            logger.error(error)
 
         return dict(message=message, error=error)
 
 
 class OutboundSMSHandler(Resource):
+    """
+    Handler for outbound SMS API
+    """
     @requires_auth
     def post(self):
         message = ''

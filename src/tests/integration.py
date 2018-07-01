@@ -33,6 +33,22 @@ class Test(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json().get('error',''), '')
 
+    def test_inbound_incorrect_method(self):
+        from_num = '1234567'
+        to_num = '9876543'
+        text = 'ABC'
+
+        payload = get_payload(from_num, to_num, text)
+
+        headers = {
+            'content-type': "application/json",
+            'authorization': "Basic dXNlcjpzZWNyZXQ="
+        }
+
+        response = request("GET", self.inbound_url, payload, headers)
+
+        self.assertEqual(response.status_code, 405)
+
     def test_inbound_incorrect_auth(self):
         from_num = '1234567'
         to_num = '9876543'

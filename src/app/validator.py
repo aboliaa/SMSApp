@@ -5,6 +5,10 @@ from utils.log import logger
 __all__ = ['validate']
 
 class ResourceSchema(Schema):
+    """
+    Marshmallow library is used for validating and sanitizing input parameters,
+    according to the schema defined here.
+    """
     from_num = fields.Str(
         load_from='from',
         dump_to='from',

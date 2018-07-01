@@ -10,7 +10,7 @@
 		{
 			"name": "outbound",
 			"request": {
-				"url": "http://127.0.0.1:5000/outbound/sms",
+				"url": "http://ec2-18-222-132-211.us-east-2.compute.amazonaws.com:5001/outbound/sms",
 				"method": "POST",
 				"header": [
 					{
@@ -35,7 +35,7 @@
 		{
 			"name": "inbound",
 			"request": {
-				"url": "http://127.0.0.1:5000/inbound/sms",
+				"url": "http://ec2-18-222-132-211.us-east-2.compute.amazonaws.com:5001/inbound/sms",
 				"method": "POST",
 				"header": [
 					{
