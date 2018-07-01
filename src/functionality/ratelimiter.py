@@ -12,15 +12,6 @@ class MaxLimitReachedError(Exception):
 def get_request_id():
     return uuid.uuid4()
 
-def ratelimit(func):
-    @wraps(func)
-    def decorater(self, *args, **kwargs):
-        # This decorator is written considering it will be applied to class
-        # method. Hence, 'from_num' is fetched from 'self'. It can be decoupled
-        # from input parameters of the function.
-        RateLimiter().check_ratelimiting(self.from_num)
-        return func(self, *args, **kwargs)
-    return decorater
 
 class RateLimiter(object):
     """
@@ -82,3 +73,15 @@ class RateLimiter(object):
                          .format(from_num))
             return True
         return False
+
+limiter = RateLimiter()
+
+def ratelimit(func):
+    @wraps(func)
+    def decorater(self, *args, **kwargs):
+        # This decorator is written considering it will be applied to class
+        # method. Hence, 'from_num' is fetched from 'self'. It can be decoupled
+        # from input parameters of the function.
+        limiter.check_ratelimiting(self.from_num)
+        return func(self, *args, **kwargs)
+    return decorater
