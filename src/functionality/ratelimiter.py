@@ -38,10 +38,12 @@ class RateLimiter(object):
     'timestamp' is maintained as score for 'request_id'
     """
 
-    def __init__(self):
+    def __init__(self,
+                 expiry_time=RATELIMITING_EXPIRY,
+                 max_items=RATELIMITING_PER_ITEMS):
         self.redis = RedisClient()
-        self.expiry_time = RATELIMITING_EXPIRY
-        self.max_items = RATELIMITING_PER_ITEMS
+        self.expiry_time = expiry_time
+        self.max_items = max_items
 
     def check_ratelimiting(self, from_num):
         request_id = get_request_id()

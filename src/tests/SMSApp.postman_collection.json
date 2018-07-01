@@ -1,0 +1,61 @@
+{
+	"variables": [],
+	"info": {
+		"name": "SMSApp",
+		"_postman_id": "50b4170f-f047-218d-404d-4a0b576abc87",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "outbound",
+			"request": {
+				"url": "http://127.0.0.1:5000/outbound/sms",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic dXNlcjpzZWNyZXQ=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"from\": \"1223432\", \"to\": \"91912345678\", \"text\": \"ABCD PQRS\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "inbound",
+			"request": {
+				"url": "http://127.0.0.1:5000/inbound/sms",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic dXNlcjpzZWNyZXQ=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"from\": \"1223432\", \"to\": \"91912345678\", \"text\": \"STOP\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
