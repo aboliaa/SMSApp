@@ -1,8 +1,8 @@
-# SMSApp: 
+# SMSApp 
 App to handle inbound and outbound SMS  
 This is a simple SMS app that exposes the following 2 APIs that accepts JSON data as input. 
 
-##Architecture
+## Architecture
 - This app is written in Python using Flask web framework.  
 - Caching and Ratelimiting is implemented by maintaining required information in Redis.  
 - User data (credentials) are stored in SQLite.
@@ -43,7 +43,7 @@ python tests/integration.py
 
 ## API specification
 
-###Inbound SMS
+### Inbound SMS
 
 URL: /inbound/sms/  
 Authentication: Basic  
@@ -54,12 +54,12 @@ Method: POST
 - to (min length 6, max length 16)
 - text (min length 1, max length 120)
 
-####Expected API behavior
+#### Expected API behavior
 - Input parameters should be valid
 - When text is STOP or STOP\n or STOP\r or STOP\r\n, 
 The ‘from’ and ‘to’ pair must be cached with an expiry of 4 hours.
 
-####Output JSON response:  
+#### Output JSON response:  
 If required parameter is missing:  
 _{"message": "", "error": "&lt;parameter_name&gt; is missing"}_
   
@@ -73,20 +73,20 @@ If all parameters are valid:
 _{"message": "inbound sms is ok", "error": ""}_
 
 
-###Outbound SMS
+### Outbound SMS
 
 URL: /outbound/sms/  
 Authentication: Basic  
 Method: POST
 
-####Input Parameters
+#### Input Parameters
 
 Parameter required example
 - from (min length 6, max length 16)
 - to (min length 6, max length 16)
 - text (min length 1, max length 120)
 
-####Expected API behavior
+#### Expected API behavior
 - Input parameters should be valid
 - If the pair of ‘from’ and ‘to’ matches the cached pair(STOP), return an error response with appropriate HTTP status code
 (see Output JSON response below)
@@ -94,7 +94,7 @@ Parameter required example
 appropriate HTTP status code in case the limit has been reached (see Output JSON response below)
 
 
-####Output JSON response:  
+#### Output JSON response:  
 If required parameter is missing:  
 _{"message": "", "error": "&lt;parameter_name&gt; is missing"}_
   
