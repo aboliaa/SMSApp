@@ -41,6 +41,11 @@ class ResourceSchema(Schema):
 
     text = fields.Str(
         required=True,
+        validate=Length(
+            min=1,
+            max=120,
+            error='to is invalid'
+        ),
         error_messages={
             'required': 'text is missing',
             'validator_failed': 'text is invalid',
